@@ -1,15 +1,15 @@
 import React from 'react'
 
 const foundationMembers = [
-  "Kalpana Shastry",
-  "Sridhar Panatula",
-  "Ravikanth Shastry",
-  "Shashikanth Shastry",
-  "Srikanth Shastry",
-  "K.Dayakar Rao",
-  "V.Praveen Kumar",
-  "M. Chandrashekar Reddy",
-  "D N V S Surya Narayana Rao"
+  { name: "Srikanth Shastry", img: "/Images/srikanth.jpg" },
+  { name: "Kalpana Shastry", img: "/Images/Kalpana.jpg" },
+  { name: "Sridhar Panatula", img: "/Images/sridhar.jpg" },
+  { name: "Ravikanth Shastry", img: "/Images/Ravikanth.jpg" },
+  { name: "Shashikanth Shastry", img: "/Images/Sashi.jpg" },
+  { name: "K.Dayakar Rao", img: "/Images/dummy.jpg" },
+  { name: "V.Praveen Kumar", img: "/Images/dummy.jpg" },
+  { name: "M. Chandrashekar Reddy", img: "/Images/dummy.jpg" },
+  { name: "D N V S Surya Narayana Rao", img: "/Images/dummy.jpg" }
 ];
 
 const executiveMembers = [
@@ -33,18 +33,18 @@ function Team() {
         <h2 className="text-xl md:text-2xl font-semibold text-center text-gray-700 mt-6 mb-8 tracking-wide">
           FOUNDING MEMBERS
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 justify-items-center mb-12">
-          {foundationMembers.map((name, idx) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center mb-12">
+          {foundationMembers.map((member, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg bg-gray-200 mb-3 border-4 border-[#f5f5dc]">
+              <div className="w-44 h-44 rounded-full overflow-hidden shadow-lg bg-gray-200 mb-3 border-4 border-[#f5f5dc]">
                 <img
-                  src="/Images/dummy.jpg"
-                  alt={name}
+                  src={member.img}
+                  alt={member.name}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="text-center text-gray-800 font-medium text-base md:text-lg">
-                {name}
+                {member.name}
               </div>
             </div>
           ))}

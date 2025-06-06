@@ -1,32 +1,31 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Home() {
-    const sideImages = [
-        "/Images/IMG_01.jpeg",
-        "/Images/IMG_02.jpeg",
-        "/Images/IMG_03.jpeg",
-        "/Images/IMG_04.jpeg",
-        "/Images/IMG_05.jpeg",
-        "/Images/IMG_06.jpeg"
-
-    ];
-
+    const [sideImages, setSideImages] = useState([]);
     const leftRef = useRef(null);
     const rightRef = useRef(null);
     const imageSetHeight = useRef(0);
 
+    // Fetch images from backend
     useEffect(() => {
+        fetch('http://localhost:5000/api/gallery')
+            .then(res => res.json())
+            .then(data => setSideImages(data))
+            .catch(() => setSideImages([]));
+    }, []);
+
+    useEffect(() => {
+        if (sideImages.length === 0) return;
         let animationFrameId;
         let isImagesLoaded = false;
 
         function getImageSetHeight() {
-            // Only measure the first set
             const imgs = leftRef.current?.querySelectorAll('img');
             if (!imgs || imgs.length < sideImages.length) return 0;
             let height = 0;
             for (let i = 0; i < sideImages.length; i++) {
-                height += imgs[i].offsetHeight + 16; // 16px = mb-4
+                height += imgs[i].offsetHeight + 16;
             }
             return height;
         }
@@ -54,13 +53,12 @@ export default function Home() {
             animate();
         }
 
-        const scrollSpeed = 0.5; // px per frame
+        const scrollSpeed = 0.5;
 
         function scrollImages(ref) {
             if (!ref.current || !imageSetHeight.current) return;
             ref.current.scrollTop += scrollSpeed;
             if (ref.current.scrollTop >= imageSetHeight.current) {
-                // Reset to the start of the first set for seamless loop
                 ref.current.scrollTop = ref.current.scrollTop - imageSetHeight.current;
             }
         }
@@ -76,10 +74,8 @@ export default function Home() {
         checkImagesLoaded(startScroll);
 
         return () => cancelAnimationFrame(animationFrameId);
-        // eslint-disable-next-line
-    }, []);
+    }, [sideImages]);
 
-    // Render images twice for seamless loop
     const renderImages = (side) => (
         <>
             {sideImages.map((src, idx) => (
