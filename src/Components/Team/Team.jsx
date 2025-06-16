@@ -7,9 +7,9 @@ const foundationMembers = [
   { name: "Ravikanth Shastry", img: "/Images/Ravikanth.jpg" },
   { name: "Shashikanth Shastry", img: "/Images/Sashi.jpg" },
   { name: "K.Dayakar Rao", img: "/Images/dummy.jpg" },
-  { name: "V.Praveen Kumar", img: "/Images/dummy.jpg" },
+  { name: "V.Praveen Kumar", img: "/Images/Praveen.jpg" },
   { name: "M. Chandrashekar Reddy", img: "/Images/dummy.jpg" },
-  { name: "D N V S Surya Narayana Rao", img: "/Images/dummy.jpg" }
+  { name: "D N V S Surya Narayana Rao", img: "/Images/Suresh.jpg" }
 ];
 
 const executiveMembers = [

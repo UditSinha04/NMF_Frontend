@@ -99,9 +99,24 @@ function Donate() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setShowQR(true);
+        // Send data to backend
+        const response = await fetch('http://localhost:5000/api/donate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: form.name,
+                address: form.address,
+                phone: form.phone
+            })
+        });
+        if (response.ok) {
+            setShowQR(true);
+            setForm({ name: '', address: '', phone: '', amount: '' });
+        } else {
+            alert('Failed to submit donation. Please try again.');
+        }
     };
 
     const handleClose = () => {
@@ -109,7 +124,7 @@ function Donate() {
     };
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex min-h-screen bg-[#f6f6e9]">
             {/* Left Side Images (auto-scroll) */}
             <div
                 ref={leftRef}
@@ -127,7 +142,7 @@ function Donate() {
                     onSubmit={handleSubmit}
                     className="bg-gray-300 p-8 rounded-lg shadow-md w-full max-w-md flex flex-col gap-4"
                 >
-                    <h2 className="text-2xl font-bold text-center mb-4">Donate to Our Charity</h2>
+                    <h2 className=" text-2xl font-bold text-center mb-4">Donate to Our Charity</h2>
                     <input
                         type="text"
                         name="name"
@@ -153,18 +168,12 @@ function Donate() {
                         value={form.phone}
                         onChange={handleChange}
                         required
+                        pattern="[0-9]{10}"
+                        maxLength={10}
+                        minLength={10}
                         className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
-                    <input
-                        type="number"
-                        name="amount"
-                        placeholder="Amount"
-                        value={form.amount}
-                        onChange={handleChange}
-                        required
-                        min="1"
-                        className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
+                    
                     <button
                         type="submit"
                         className="bg-blue-600 text-white rounded px-4 py-2 font-semibold hover:bg-blue-700 transition"
@@ -175,7 +184,8 @@ function Donate() {
                 {showQR && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                            <h3 className="text-lg font-semibold mb-4">Scan to Pay</h3>
+                            <h3 className="underline text-xl font-semibold mb-4">Scan to Pay</h3>
+                            <h2 className="text-lg mb-4">Please take a Screenshot of the Transaction.</h2>
                             <img
                                 src="/Images/UPI_QR.jpg"
                                 alt="QR Code"

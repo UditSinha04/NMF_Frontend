@@ -10,6 +10,7 @@ import Donate from './Components/Donate/Donate.jsx'
 import Admin from './Components/Admin/Admin.jsx'
 import Gallery from './Components/Gallery/Gallery.jsx'
 import Team from './Components/Team/Team.jsx'
+import Reports from './Components/Reports/Reports.jsx'
 
 
 const router = createBrowserRouter(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path='Admin' element={<Admin />} />
       <Route path='Gallery' element={<Gallery />} />
       <Route path='Team' element={<Team/>}/>
+      <Route path='Reports' element={<Reports/>}/>
     </Route>
   )
 )

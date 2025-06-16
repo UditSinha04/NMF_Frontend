@@ -28,7 +28,7 @@ export default function About() {
           {/* Right: Text */}
           <div className="md:w-7/12 lg:w-6/12 text-justify">
             <h2 className="text-3xl text-gray-900 font-bold md:text-4xl mb-4">
-              About Our Charitable Trust
+              About Our Foundation
             </h2>
             <p className="mt-4 text-gray-700">
               <span className="font-semibold">NIRMALA MOHAN Foundation -</span> The motivation for starting this foundation and doing social service, the main role model, mentor and the continued inspiration for us is our father, Lion SHASTRY MOHAN.
